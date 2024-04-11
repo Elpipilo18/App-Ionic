@@ -1,0 +1,56 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>almacen</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">almacen</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="container">
+    <a routerLink="/admin">Regresar</a>
+    <div *ngIf="ListaAlmacen">
+      <table>
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Existencias</th>
+            <th>Precio Unitario</th>
+            <th>#</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let pro of ProdList">
+            <td>{{pro.id_articulo}}</td>
+            <td>{{pro.articulo}}</td>
+            <td>{{pro.almacen}}</td>
+            <td>{{pro.precio}}</td>
+            <td>
+              <button class="btn btn-warning" (click)="EditProduct(pro.id_articulo)">Editar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div *ngIf="ArticuloInfo">
+      <div class="d-grid gap-2">
+        <input type="number" [(ngModel)]="artId" hidden>
+        <label for="">Producto: </label>
+        <input class="form-control" type="text" [(ngModel)]="artName">
+        <label for="">Tipo:</label>
+        <input class="form-control" type="text" [(ngModel)]="artType">
+        <label for="">Existencias: </label>
+        <input class="form-control" type="number" [(ngModel)]="artStock">
+        <label for="">Precio</label>
+        <input class="form-control" type="number" [(ngModel)]="artPrice">
+        <button class="btn btn-success" (click)="UpdateProdInfo()">Actualizar</button>
+        <button class="btn btn-danger" (click)="DeleteProduct()">Eliminar</button>
+      </div>
+    </div>
+  </div>
+</ion-content>

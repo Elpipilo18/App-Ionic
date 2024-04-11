@@ -1,0 +1,57 @@
+.titulo {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 30px;
+    margin: 10px;
+}
+
+.opciones {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin: 10px;
+}
+
+.btn-opcion {
+    background-color: rgb(16, 179, 233);
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: white;
+
+}
+
+.contenido {
+    display: grid;
+}
+
+.contenido div {
+    display: grid;
+    justify-content: center;
+}
+
+table {
+    background-color: lightblue;
+    padding: 5px 0px;
+
+    & thead {
+        background-color: rgb(255, 255, 255);
+        color: rgb(0, 0, 0);
+    }
+
+    & tbody {
+        color: rgb(0, 0, 0);
+        text-align: center;
+
+        & tr {
+            background-color: rgb(135, 221, 224);
+            border: 1px solid black;
+
+        }
+
+        & tr:nth-child(odd) {
+            background-color: rgb(16, 240, 240);
+        }
+
+    }
+}

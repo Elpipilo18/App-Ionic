@@ -1,0 +1,113 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large"></ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="container">
+    <div class="header">
+      <nav class="title">
+        <h5>Bienvenido</h5>
+      </nav>
+      <div class="user-info">
+        <ion-button>{{usuario}}</ion-button>
+        <ion-button (click)="CerrarSesion()">Logout</ion-button>
+      </div>
+    </div>
+    <div id="contenido">
+      <div id="opciones">
+        <a (click)="ListarProductos()" type="button">Productos</a>
+        <a (click)="VerMisCompras()" type="button">Mis Compras</a>
+        <a class="carritoCounter" (click)="VerMiCarrito()" type="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart2"
+            viewBox="0 0 16 16">
+            <path
+              d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5M3.14 5l1.25 5h8.22l1.25-5zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0m9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0" />
+          </svg>
+          <span>
+            {{Carrito.length}}
+          </span>
+        </a>
+      </div>
+      <div *ngIf="VerProductos" id="productos">
+        <div class="card" *ngFor="let item of ListaProductos">
+          <div class="img-content">
+            <img src="../../assets/img/{{item.archivo_img}}.jpg" alt="producto">
+          </div>
+          <div id="cardInfo">
+            <p><b>{{item.articulo}}</b></p>
+            <p>$ {{item.precio}}</p>
+            <p>Stock: {{item.almacen}}</p>
+            <button class="card-btn-cart" *ngIf="item.almacen == 0">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-cart-x-fill" viewBox="0 0 16 16">
+                <path
+                  d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0M7.354 5.646 8.5 6.793l1.146-1.147a.5.5 0 0 1 .708.708L9.207 7.5l1.147 1.146a.5.5 0 0 1-.708.708L8.5 8.207 7.354 9.354a.5.5 0 1 1-.708-.708L7.793 7.5 6.646 6.354a.5.5 0 1 1 .708-.708" />
+              </svg>
+            </button>
+            <button class="card-btn-cart" *ngIf="item.almacen > 0" type="button"
+              (click)="AgregarDetalle(item.id_articulo)">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-cart-plus-fill" viewBox="0 0 16 16">
+                <path
+                  d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0M9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="VerCarrito">
+        <div id="CartList">
+          <span>Productos</span>
+          <div class="card" *ngFor="let item of Carrito">
+            <div id="imcont">
+              <div class="img-content">
+                <img src="../../assets/img/{{item.archivo_img}}.jpg" alt="{{item.articulo}}">
+              </div>
+              <div id="btns">
+                <p>{{item.articulo}}</p>
+                <p>${{item.precio}}</p>
+                <p>{{item.cantidad}} U</p>
+                <button type="button" (click)="EliminaDetalleCarrito(item.id_articulo)">Eliminar</button>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="Carrito.length == 0">
+            <h5>Carrito Vacio</h5>
+          </div>
+        </div>
+        <div id="buyBox">
+          <span> Total: {{TotalCarrito}}</span>
+          <button (click)="Comprar()">Comprar Ahora</button>
+        </div>
+      </div>
+      <div *ngIf="VerCompras">
+        <table style="text-align: center;" align="center">
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Articulo </th>
+              <th>Precio</th>
+              <th>Cantidad</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="" *ngFor="let item of ListaCompras">
+              <td>{{item.fecha}}</td>
+              <td>{{item.id_articulo}}</td>
+              <td>${{item.precio}}</td>
+              <td>{{item.cantidad}} U</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</ion-content>

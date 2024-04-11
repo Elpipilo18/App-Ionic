@@ -1,0 +1,70 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large"></ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="container">
+    <button (click)="CerrarSesion()">caca</button>
+    <div class="titulo">
+      Bienvenido Administrador
+    </div>
+    <div class="opciones">
+      <a routerLink="/almacen" class="btn-opcion">
+        Ver Almacen
+      </a>
+      <a routerLink="/agrega-producto" class="btn-opcion">
+        Agregar Producto
+      </a>
+      <a routerLink="/ventas" class="btn-opcion">
+        Ver Ventas
+      </a>
+      <a routerLink="/usuarios" class="btn-opcion">
+        Usuarios
+      </a>
+    </div>
+    <div class="contenido">
+      <div>
+        <h6>Ingresos Diarios</h6>
+        <table>
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Total Vendido</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let a of VentasDiarias">
+              <td>{{a.Fecha}}</td>
+              <td>$ {{a.Total_del_Dia}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <h6>Ingresos Mensuales</h6>
+        <table>
+          <thead>
+            <tr>
+              <th>Mes</th>
+              <th>Total Vendido</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let a of VentasMensuales">
+              <td>{{GetMonth(a.Mes)}}</td>
+              <td>$ {{a.Total_del_Mes}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,24 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>agregaProducto</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">agregaProducto</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <div id="container">
+    <a routerLink="/admin">Regresar</a>
+    <form id="form">
+        <input type="text" name="precio" placeholder="Nombre" [(ngModel)] = "nombre">
+        <input type="text" name="tipo" placeholder="Tipo" [(ngModel)] = "tipo">
+        <input type="number" name="existencias" placeholder="Existencias" [(ngModel)] = "existencias">
+        <input type="number" name="precio" placeholder="Precio" [(ngModel)] = "precio">
+        <button id="btn-add" (click)="AgregarProducto()">Agregar</button>
+    </form>
+  </div>
+
+</ion-content>

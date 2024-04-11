@@ -1,0 +1,58 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large"></ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+
+  <div id="container">
+    <div *ngIf="VerVentas">
+      <a routerLink="/admin">back</a>
+      <legend>Ventas realizadas</legend>
+      <table>
+        <thead>
+          <th>id_venta</th>
+          <th>Fecha</th>
+          <th>Total</th>
+          <th>Accion</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let venta of ListaVenta">
+            <td>{{venta.id_venta}}</td>
+            <td>{{venta.fecha_venta}}</td>
+            <td>{{venta.total}}</td>
+            <td><button (click)="verDetalles(venta.id_venta)">Ver detalles</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div *ngIf="VerListaDetalles.length == 0 && VerDetalles">
+      <legend>No se han realizado ventas</legend>
+      <a (click)="ListarVentas()">Back</a>
+    </div>
+    <div *ngIf="VerListaDetalles.length > 0 && VerDetalles">
+      <legend>Detalles de Venta</legend>
+      <table>
+        <tr>
+          <th>Articulo</th>
+          <th>Precio</th>
+          <th>Cantidad</th>
+          <th>Accion</th>
+        </tr>
+        <tr *ngFor="let item of VerListaDetalles">
+          <td>{{item.id_articulo}}</td>
+          <td>{{item.precio}}</td>
+          <td>{{item.cantidad}}</td>
+          <td><button (click)="EliminarDetalle(item.id_detalle)">Eliminar</button></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</ion-content>
